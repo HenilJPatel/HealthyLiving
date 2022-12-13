@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1888859036",
+    "firebase_url": "https://healthyliving-bfe3f-default-rtdb.firebaseio.com",
+    "project_id": "healthyliving-bfe3f",
+    "storage_bucket": "healthyliving-bfe3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1888859036:android:bfa0fd71d286f790280e59",
+        "android_client_info": {
+          "package_name": "com.example.healthyliving"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1888859036-6bm884mm4cjvvbt1n2qphcmg98fo9c5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxXETxrvnLQdW-1KPGCvORFpO58SRe8Bk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1888859036-6bm884mm4cjvvbt1n2qphcmg98fo9c5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
