@@ -82,7 +82,7 @@ public class Homescreen extends AppCompatActivity {
         products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Homescreen.this, Catalog_Page.class);
+                Intent intent = new Intent(Homescreen.this, Product_Page.class);
                 startActivity(intent);
             }
         });

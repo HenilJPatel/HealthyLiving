@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class Product_Page extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    PrescriptionLoadAdapter prescriptionLoadAdapter;
-    ArrayList<PrescriptionData> list;
+    ProductListLoad productlist;
+    ArrayList<ProductData> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +30,21 @@ public class Product_Page extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list=new ArrayList<>();
-        prescriptionLoadAdapter = new PrescriptionLoadAdapter(this,list);
-        recyclerView.setAdapter(prescriptionLoadAdapter);
+        productlist = new ProductListLoad(this,list);
+        recyclerView.setAdapter(productlist);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     try {
-                        PrescriptionData data = dataSnapshot.getValue(PrescriptionData.class);
+                        ProductData data = dataSnapshot.getValue(ProductData.class);
                         list.add(data);
                     } catch (Exception e){
                         System.out.println(e.toString());
                     }
                 }
                 if(list.size()>0){
-                    prescriptionLoadAdapter.notifyDataSetChanged();
+                    productlist.notifyDataSetChanged();
                 }
             }
             @Override

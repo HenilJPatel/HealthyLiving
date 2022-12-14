@@ -2,34 +2,36 @@ package com.example.healthyliving;
 
 public class ProductData {
 
-        // variables for storing our image and name.
-        private String name;
-        private String imgUrl;
+    // variables for storing our image and name.
+    private String pID;
+    private String pName;
+    private String pUrl;
 
-        public ProductData() {
-            // empty constructor required for firebase.
-        }
+    public ProductData() {}
 
-        // constructor for our object class.
-        public ProductData(String name, String imgUrl) {
-            this.name = name;
-            this.imgUrl = imgUrl;
-        }
+    // getter and setter methods
+    public String getpID() {
+        return pID;
+    }
 
-        // getter and setter methods
-        public String getName() {
-            return name;
-        }
+    public void setpID(String pID) {
+        this.pID = pID;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public String getpName() {
+        return pName;
+    }
 
-        public String getImgUrl() {
-            return imgUrl;
-        }
+    public void setpName(String pName) {
+        this.pName = pName;
+    }
 
-        public void setImgUrl(String imgUrl) {
-            this.imgUrl = imgUrl;
-        }
+    public String getpUrl() {
+        return pUrl;
+    }
+
+    public void setpUrl(String pUrl) {
+        this.pUrl = pUrl;
+    }
+
 }
