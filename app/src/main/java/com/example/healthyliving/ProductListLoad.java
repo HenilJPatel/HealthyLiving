@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -87,8 +88,8 @@ public class ProductListLoad extends RecyclerView.Adapter<ProductListLoad.MyView
             context=itemView.getContext();
             itemView.setOnClickListener(v -> {
                 int itemPosition  = getLayoutPosition();
-                /*Toast.makeText(context, "" + list.get(itemPosition).getPresID(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
+                Toast.makeText(context, "" + list.get(itemPosition).getpID(), Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
                 intent.putExtra("presID",list.get(itemPosition).getPresID().toString());
                 context.startActivity(intent);*/
             });

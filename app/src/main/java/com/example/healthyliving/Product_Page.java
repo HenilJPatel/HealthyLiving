@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +28,8 @@ public class Product_Page extends AppCompatActivity {
         recyclerView=findViewById(R.id.PrescriptionViewer);
         databaseReference= FirebaseDatabase.getInstance().getReference("Product");
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        int columns=2;
+        recyclerView.setLayoutManager(new GridLayoutManager(this,columns));
         list=new ArrayList<>();
         productlist = new ProductListLoad(this,list);
         recyclerView.setAdapter(productlist);
