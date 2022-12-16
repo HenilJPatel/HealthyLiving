@@ -26,13 +26,14 @@
                 android:layout_height="350dp"
                 android:layout_weight="1"
                 tools:ignore="ImageContrastCheck"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="@string/product_name" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingStart="5dp"
+            android:paddingHorizontal="5dp"
             android:layout_marginTop="2dp"
             android:orientation="vertical">
             <TextView
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/lexend_light"
-                android:text="Dayquil"
+                android:text="@string/product_name"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -60,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lexend_light"
-                        android:text="Brand"
+                        android:text="@string/brand"
                         android:textColor="@color/black"
                         android:textSize="25sp"
                         android:textStyle="normal"/>
@@ -82,7 +83,8 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDsupply"
                         android:layout_width="match_parent"
@@ -91,7 +93,8 @@
                         android:layout_marginStart="15dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,7 +109,8 @@
                         android:textSize="20sp"
                         android:layout_marginStart="2dp"
                         android:layout_gravity="center_vertical"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDrefill"
                         android:layout_width="match_parent"
@@ -115,7 +119,8 @@
                         android:layout_marginStart="2dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -129,12 +134,13 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDdoctor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dr.Venissa Cruze"
+                        android:text="@string/doctor_name"
                         android:layout_marginStart="17dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -151,12 +157,13 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDrefilldate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="10/20/2022"
+                        android:text="@string/random_date"
                         android:layout_marginStart="7dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -173,12 +180,13 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDnextrefill"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Not Available"
+                        android:text="@string/random_date"
                         android:layout_marginStart="3dp"
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -201,14 +209,16 @@
                         android:text="Directions for Use"
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDdirection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Not Available"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -229,14 +239,16 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/PDwarning"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Not Available"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
