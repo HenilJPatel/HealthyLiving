@@ -20,26 +20,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
- public class PrescriptionDetailAdapter extends RecyclerView.Adapter<com.example.healthyliving.PrescriptionDetailAdapter.MyViewHolder> {
+ public class Adapter_Prescription_Details extends RecyclerView.Adapter<Adapter_Prescription_Details.MyViewHolder> {
 
      Context context;
-     ArrayList<PrescriptionData> list;
+     ArrayList<Data_Prescription> list;
 
-     public PrescriptionDetailAdapter(Context context, ArrayList<PrescriptionData> list) {
+     public Adapter_Prescription_Details(Context context, ArrayList<Data_Prescription> list) {
          this.context = context;
          this.list = list;
      }
 
      @NonNull
      @Override
-     public com.example.healthyliving.PrescriptionDetailAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         View v= LayoutInflater.from(context).inflate(R.layout.prescriptiondetails,parent,false);
-         return new com.example.healthyliving.PrescriptionDetailAdapter.MyViewHolder(v);
+     public Adapter_Prescription_Details.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+         View v= LayoutInflater.from(context).inflate(R.layout.cardview_prescription_details,parent,false);
+         return new Adapter_Prescription_Details.MyViewHolder(v);
      }
 
      @Override
-     public void onBindViewHolder(@NonNull com.example.healthyliving.PrescriptionDetailAdapter.MyViewHolder holder, int position) {
-         PrescriptionData pres= list.get(position);
+     public void onBindViewHolder(@NonNull Adapter_Prescription_Details.MyViewHolder holder, int position) {
+         Data_Prescription pres= list.get(position);
          {
              DatabaseReference db= FirebaseDatabase.getInstance().getReference("Product/"+pres.getProductID());
              db.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -47,7 +47,7 @@ import java.util.ArrayList;
                  public void onDataChange(@NonNull DataSnapshot snapshot) {
                      try {
                          String msg = snapshot.child("pName").getValue(String.class);
-                         holder.Productname.setText(msg);
+                         holder.Product_name.setText(msg);
                          String brand = snapshot.child("pBrand").getValue(String.class);
                          holder.brand.setText(brand);
                          String direction = snapshot.child("pDirections").getValue(String.class);
@@ -66,11 +66,11 @@ import java.util.ArrayList;
                      Log.e("Firebase",error.toString());
                  }
              });}//Set Text for Med Name,Brand
-         holder.drname.setText(pres.getDoctorID());
-         holder.daysupply.setText(pres.getDaysofsupply());
-         holder.noofrefill.setText(pres.getRefill());
-         holder.lastrefill.setText(pres.getLastrefilldate());
-         holder.nextrefill.setText(pres.getNextrefilldate());
+         holder.dr_name.setText(pres.getDoctorID());
+         holder.day_supply.setText(pres.getDaysofsupply());
+         holder.no_of_refill.setText(pres.getRefill());
+         holder.last_refill.setText(pres.getLastrefilldate());
+         holder.next_refill.setText(pres.getNextrefilldate());
      }
 
      @Override
@@ -79,18 +79,18 @@ import java.util.ArrayList;
      }
 
      public static class MyViewHolder extends RecyclerView.ViewHolder{
-         TextView Productname,brand,daysupply,noofrefill,drname,lastrefill,nextrefill,direction,warning;
+         TextView Product_name,brand, day_supply, no_of_refill, dr_name, last_refill, next_refill,direction,warning;
          ImageView img;
          public MyViewHolder(@NonNull View itemView) {
              super(itemView);
              img=itemView.findViewById(R.id.PDimageView);
-             Productname=itemView.findViewById(R.id.PDName);
+             Product_name =itemView.findViewById(R.id.PDName);
              brand=itemView.findViewById(R.id.PDbrand);
-             daysupply=itemView.findViewById(R.id.PDsupply);
-             noofrefill=itemView.findViewById(R.id.PDrefill);
-             drname=itemView.findViewById(R.id.PDdoctor);
-             lastrefill=itemView.findViewById(R.id.PDrefilldate);
-             nextrefill=itemView.findViewById(R.id.PDnextrefill);
+             day_supply =itemView.findViewById(R.id.PDsupply);
+             no_of_refill =itemView.findViewById(R.id.PDrefill);
+             dr_name =itemView.findViewById(R.id.PDdoctor);
+             last_refill =itemView.findViewById(R.id.PDrefilldate);
+             next_refill =itemView.findViewById(R.id.PDnextrefill);
              direction=itemView.findViewById(R.id.PDdirection);
              warning=itemView.findViewById(R.id.PDwarning);
          }

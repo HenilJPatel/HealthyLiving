@@ -1,5 +1,6 @@
 package com.example.healthyliving;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -9,10 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +35,7 @@ public class NewAppointment extends AppCompatActivity  {
     String docName,Address;
     EditText date_time;
     final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private long maxid=0;
+    private long max_id =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class NewAppointment extends AppCompatActivity  {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    maxid = snapshot.getChildrenCount() ;
+                    max_id = snapshot.getChildrenCount() ;
                 }
             }
             @Override
@@ -57,17 +56,12 @@ public class NewAppointment extends AppCompatActivity  {
         /*Appointment Date*/{
             date_time = findViewById(R.id.editTime);
             final Calendar cal = Calendar.getInstance();
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
             date_time.setText(formatter.format(cal.getTime()));
             date_time.setInputType(InputType.TYPE_NULL);
-            date_time.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatePick(date_time);
-                }
-            });
+            date_time.setOnClickListener(v -> DatePick(date_time));
         }
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,DoctorName);
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,DoctorName);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,67 +78,55 @@ public class NewAppointment extends AppCompatActivity  {
         /*New Appointment Button*/{
 
             Button btnNew = findViewById(R.id.btnAppointment);
-            btnNew.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(spin.getSelectedItemPosition()!=0) {
-                        AppointmentData aptData = new AppointmentData();
-                        docName = ((Spinner) findViewById(R.id.spinnerDoctorName)).getSelectedItem().toString().trim();
-                        EditText address = findViewById(R.id.editAddress);
-                        Address = address.getText().toString();
-                        String Date = ((EditText) findViewById(R.id.editTime)).getText().toString().trim();
-                        aptData.setPatientName("null");
-                        aptData.setDoctorName(docName);
-                        aptData.setAddress(Address);
-                        aptData.setTime(Date);
-                        aptData.setStatus("active");
-                        aptData.setId(maxid);
-                        DatabaseReference dbref;
-                        dbref = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("Appointments");
-                        dbref.child(String.valueOf(maxid)).setValue(aptData);
-                        Toast.makeText(NewAppointment.this, "Appointment Created", Toast.LENGTH_LONG).show();
-                    }
-                    else{
-                        Toast.makeText(NewAppointment.this,"Please Select a Doctor",Toast.LENGTH_SHORT).show();
-                    }
+            btnNew.setOnClickListener(v -> {
+                if(spin.getSelectedItemPosition()!=0) {
+                    AppointmentData aptData = new AppointmentData();
+                    docName = ((Spinner) findViewById(R.id.spinnerDoctorName)).getSelectedItem().toString().trim();
+                    EditText address = findViewById(R.id.editAddress);
+                    Address = address.getText().toString();
+                    String Date = ((EditText) findViewById(R.id.editTime)).getText().toString().trim();
+                    aptData.setPatientName("null");
+                    aptData.setDoctorName(docName);
+                    aptData.setAddress(Address);
+                    aptData.setTime(Date);
+                    aptData.setStatus("active");
+                    aptData.setId(max_id);
+                    DatabaseReference dbref;
+                    dbref = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("Appointments");
+                    dbref.child(String.valueOf(max_id)).setValue(aptData);
+                    Toast.makeText(NewAppointment.this, "Appointment Created", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(NewAppointment.this,"Please Select a Doctor",Toast.LENGTH_SHORT).show();
                 }
             });
         }
         /*Back Button*/{
             Button back = findViewById(R.id.btnBack);
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(NewAppointment.this, Appointments.class);
-                    startActivity(intent);
-                }
+            back.setOnClickListener(v -> {
+                Intent intent = new Intent(NewAppointment.this, Appointments.class);
+                startActivity(intent);
             });
         }
     }
 
     public void DatePick(final EditText date_time) {
         final Calendar calender = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calender.set(Calendar.YEAR, year);
-                calender.set(Calendar.MONTH, month);
-                calender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
+            calender.set(Calendar.YEAR, year);
+            calender.set(Calendar.MONTH, month);
+            calender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        calender.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        calender.set(Calendar.MINUTE, minute);
+            TimePickerDialog.OnTimeSetListener timeSetListener = (view1, hourOfDay, minute) -> {
+                calender.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calender.set(Calendar.MINUTE, minute);
 
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
-                        date_time.setText(simpleDateFormat.format(calender.getTime()));
-                    }
-                };
+                date_time.setText(simpleDateFormat.format(calender.getTime()));
+            };
 
-                new TimePickerDialog(NewAppointment.this, timeSetListener, calender.get(Calendar.HOUR_OF_DAY), calender.get(Calendar.MINUTE), true).show();
-            }
+            new TimePickerDialog(NewAppointment.this, timeSetListener, calender.get(Calendar.HOUR_OF_DAY), calender.get(Calendar.MINUTE), true).show();
         };
         new DatePickerDialog(NewAppointment.this, dateSetListener,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show();
     }

@@ -100,4 +100,11 @@
     <string name="create_username">Create Username</string>
     <string name="title_activity_result">resultActivity</string>
     <string name="title_activity_appoint_map">AppointMap</string>
+    <string name="cancel_appointment">Cancel Appointment#</string>
+    <string name="product_catalog">Product Catalog</string>
+    <string name="product_name">Product Name</string>
+    <string name="product">Product</string>
+    <string name="brand">Brand</string>
+    <string name="doctor_name">Doctor Name</string>
+    <string name="random_date">01/01/2022</string>
 </resources>

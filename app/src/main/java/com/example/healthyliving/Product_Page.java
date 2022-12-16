@@ -1,5 +1,6 @@
 package com.example.healthyliving;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,34 +19,35 @@ import java.util.ArrayList;
 public class Product_Page extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    ProductListLoad productlist;
-    ArrayList<ProductData> list;
+    Adapter_Product_List product_list;
+    ArrayList<Data_Product> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prescription_list);
-        recyclerView=findViewById(R.id.PrescriptionViewer);
+        setContentView(R.layout.activity_product_list);
+        recyclerView=findViewById(R.id.ProductViewer);
         databaseReference= FirebaseDatabase.getInstance().getReference("Product");
         recyclerView.setHasFixedSize(true);
         int columns=2;
         recyclerView.setLayoutManager(new GridLayoutManager(this,columns));
         list=new ArrayList<>();
-        productlist = new ProductListLoad(this,list);
-        recyclerView.setAdapter(productlist);
+        product_list = new Adapter_Product_List(this,list);
+        recyclerView.setAdapter(product_list);
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     try {
-                        ProductData data = dataSnapshot.getValue(ProductData.class);
+                        Data_Product data = dataSnapshot.getValue(Data_Product.class);
                         list.add(data);
                     } catch (Exception e){
                         System.out.println(e.toString());
                     }
                 }
                 if(list.size()>0){
-                    productlist.notifyDataSetChanged();
+                    product_list.notifyDataSetChanged();
                 }
             }
             @Override

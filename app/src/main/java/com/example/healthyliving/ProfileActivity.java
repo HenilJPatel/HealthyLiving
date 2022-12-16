@@ -2,7 +2,6 @@ package com.example.healthyliving;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
     final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -28,14 +28,15 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getUid());
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(mAuth.getUid()));
         Query query = dbref.child("Profile");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue() != null) {
-                    UserProfile uP = new UserProfile();
+                    UserProfile uP;
                     uP = (snapshot.getValue(UserProfile.class));
+                    assert uP != null;
                     CheckFields(uP);
                 } else {
                     UserProfile empty = new UserProfile();
@@ -49,12 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         Button Submit = findViewById(R.id.ProfileSubmitButton);
-        Submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadProfile();
-            }
-        });
+        Submit.setOnClickListener(v -> uploadProfile());
     }
     public void CheckFields(UserProfile uP)
     {
@@ -97,14 +93,11 @@ public class ProfileActivity extends AppCompatActivity {
         ProfileData.setPrimaryDoctor(profDoc.getText().toString().trim());
         ProfileData.setSSN(profSSN.getText().toString().trim());
         ProfileData.setAddress(profAddress.getText().toString().trim());
-        DatabaseReference dr=FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getUid()).child("Profile");
+        DatabaseReference dr=FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(mAuth.getUid())).child("Profile");
         dr.setValue(ProfileData)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Intent intent=new Intent(ProfileActivity.this,ViewProfile.class);
-                        startActivity(intent);
-                    }
+                .addOnSuccessListener(unused -> {
+                    Intent intent=new Intent(ProfileActivity.this,ViewProfile.class);
+                    startActivity(intent);
                 });
     }
 }

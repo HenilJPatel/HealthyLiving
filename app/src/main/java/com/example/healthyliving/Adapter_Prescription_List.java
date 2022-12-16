@@ -21,12 +21,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PrescriptionLoadAdapter extends RecyclerView.Adapter<PrescriptionLoadAdapter.MyViewHolder> {
+public class Adapter_Prescription_List extends RecyclerView.Adapter<Adapter_Prescription_List.MyViewHolder> {
 
     Context context;
-    ArrayList<PrescriptionData> list;
+    ArrayList<Data_Prescription> list;
 
-    public PrescriptionLoadAdapter(Context context, ArrayList<PrescriptionData> list) {
+    public Adapter_Prescription_List(Context context, ArrayList<Data_Prescription> list) {
         this.context = context;
         this.list = list;
     }
@@ -34,20 +34,20 @@ public class PrescriptionLoadAdapter extends RecyclerView.Adapter<PrescriptionLo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.items,parent,false);
+        View v= LayoutInflater.from(context).inflate(R.layout.cardview_prescription_list,parent,false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        PrescriptionData pres= list.get(position);
+        Data_Prescription pres= list.get(position);
         {DatabaseReference db= FirebaseDatabase.getInstance().getReference("Product/"+pres.getProductID());
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     String msg = snapshot.child("pName").getValue(String.class);
-                    holder.Productname.setText(msg);
+                    holder.Product_name.setText(msg);
                     String brand = snapshot.child("pBrand").getValue(String.class);
                     holder.brand.setText(brand);
                     String url=snapshot.child("pURL").getValue(String.class);
@@ -64,11 +64,11 @@ public class PrescriptionLoadAdapter extends RecyclerView.Adapter<PrescriptionLo
         });}//Set Text for Med Name,Brand
         holder.img.setMaxWidth(130);
         holder.img.setMaxHeight(150);
-        holder.drname.setText(pres.getDoctorID());
-        holder.daysupply.setText(pres.getDaysofsupply());
-        holder.noofrefill.setText(pres.getRefill());
-        holder.lastrefill.setText(pres.getLastrefilldate());
-        holder.nextrefill.setText(pres.getNextrefilldate());
+        holder.dr_name.setText(pres.getDoctorID());
+        holder.day_supply.setText(pres.getDaysofsupply());
+        holder.no_of_refill.setText(pres.getRefill());
+        holder.last_refill.setText(pres.getLastrefilldate());
+        holder.next_refill.setText(pres.getNextrefilldate());
     }
 
     @Override
@@ -78,29 +78,25 @@ public class PrescriptionLoadAdapter extends RecyclerView.Adapter<PrescriptionLo
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Productname,brand,daysupply,noofrefill,drname,lastrefill,nextrefill;
+        TextView Product_name,brand, day_supply, no_of_refill, dr_name, last_refill, next_refill;
         ImageView img;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.imageView123);
-            Productname=itemView.findViewById(R.id.productname);
+            Product_name =itemView.findViewById(R.id.productname);
             brand=itemView.findViewById(R.id.brandname);
-            daysupply=itemView.findViewById(R.id.daySupply);
-            noofrefill=itemView.findViewById(R.id.Refill);
-            drname=itemView.findViewById(R.id.drName);
-            lastrefill=itemView.findViewById(R.id.refillDate);
-            nextrefill=itemView.findViewById(R.id.NextRefill);
+            day_supply =itemView.findViewById(R.id.daySupply);
+            no_of_refill =itemView.findViewById(R.id.Refill);
+            dr_name =itemView.findViewById(R.id.drName);
+            last_refill =itemView.findViewById(R.id.refillDate);
+            next_refill =itemView.findViewById(R.id.NextRefill);
 
             context=itemView.getContext();
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int itemPosition  = getLayoutPosition();
-                    //Toast.makeText(context, "" + list.get(itemPosition).getPresID(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
-                    intent.putExtra("presID",list.get(itemPosition).getPresID().toString());
-                    context.startActivity(intent);
-                }
+            itemView.setOnClickListener(v -> {
+                int itemPosition  = getLayoutPosition();
+                Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
+                intent.putExtra("presID",list.get(itemPosition).getPresID().toString());
+                context.startActivity(intent);
             });
         }
     }

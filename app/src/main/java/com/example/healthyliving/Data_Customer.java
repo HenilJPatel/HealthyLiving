@@ -1,13 +1,13 @@
 package com.example.healthyliving;
 
-public class Customer {
+public class Data_Customer {
     private String Name;
     private String Contact;
     private String Email;
     private String Username;
     private String Password;
 
-    public Customer() {
+    public Data_Customer() {
     }
 
     public String getName() {
@@ -49,15 +49,15 @@ public class Customer {
     public void setPassword(String password) {
         Password = password;
     }
-    public Customer LoginData(){
-        Customer cust=new Customer();
+    public Data_Customer LoginData(){
+        Data_Customer cust=new Data_Customer();
         cust.Username=getUsername();
         cust.Password=getPassword();
         cust.Email=getEmail();
         return cust;
     }
-    public Customer Signupdata(){
-        Customer cust=new Customer();
+    public Data_Customer Signupdata(){
+        Data_Customer cust=new Data_Customer();
         cust.Name=getName();
         cust.Contact=getContact();
         cust.Username=getUsername();

@@ -1,11 +1,13 @@
 package com.example.healthyliving;
 
+import android.annotation.SuppressLint;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PrescriptionData {
+public class Data_Prescription {
 
 
     private Long presID;
@@ -15,7 +17,7 @@ public class PrescriptionData {
     private Long doctorID;
     private Long daysofsupply;
 
-    public PrescriptionData() {
+    public Data_Prescription() {
     }
 
     public Long getPresID() {
@@ -67,11 +69,12 @@ public class PrescriptionData {
     }
 
     public String getNextrefilldate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
             if(refill>0) {
                 Date date = dateFormat.parse(lastrefilldate);
                 Calendar c = Calendar.getInstance();
+                assert date != null;
                 c.setTime(date);
                 c.add(Calendar.DAY_OF_MONTH, daysofsupply.intValue());
                 return dateFormat.format(c.getTime());

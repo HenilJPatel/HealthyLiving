@@ -2,7 +2,6 @@ package com.example.healthyliving;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,14 +18,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Objects;
 
 public class Homescreen extends AppCompatActivity {
-    private Button prescription;
-    private Button appointment;
-    private Button products;
-    private Button logout;
     private FirebaseAuth mAuth;
 
     @Override
@@ -51,71 +45,53 @@ public class Homescreen extends AppCompatActivity {
     }
     private void Home(){
         FirebaseUser user=mAuth.getCurrentUser();
-        TextView s=(TextView)findViewById(R.id.textView11);
+        TextView s= findViewById(R.id.textView11);
+        assert user != null;
         s.setText(user.getEmail());
         //Toast.makeText(this,"Signed in as "+user.getEmail(),Toast.LENGTH_SHORT).show();
         Button btnProfile = findViewById(R.id.profile);
-        btnProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homescreen.this, ViewProfile.class);
-                startActivity(intent);
-            }
+        btnProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this, ViewProfile.class);
+            startActivity(intent);
         });
-        prescription = (Button) findViewById(R.id.prescription);
-        prescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homescreen.this, PrescriptionActivity.class);
-                startActivity(intent);
-            }
+        Button prescription = findViewById(R.id.prescription);
+        prescription.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this, PrescriptionActivity.class);
+            startActivity(intent);
         });
-        appointment = (Button) findViewById(R.id.appointments);
-        appointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homescreen.this,Appointments.class);
-                startActivity(intent);
-            }
+        Button appointment = findViewById(R.id.appointments);
+        appointment.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this,Appointments.class);
+            startActivity(intent);
         });
-        products = (Button) findViewById(R.id.products);
-        products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homescreen.this, Product_Page.class);
-                startActivity(intent);
-            }
+        Button products = findViewById(R.id.products);
+        products.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this, Product_Page.class);
+            startActivity(intent);
         });
-        logout = (Button) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(Homescreen.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        Button logout = findViewById(R.id.logout);
+        logout.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(Homescreen.this, LoginActivity.class);
+            startActivity(intent);
         });
     }
     private void getUsername(){
         DatabaseReference db= FirebaseDatabase.getInstance().getReference("Users");
-        Query query=db.child(mAuth.getUid()).child("LoginDetails").child("name");
-        long date=new Date().getTime();
+        Query query=db.child(Objects.requireNonNull(mAuth.getUid())).child("LoginDetails").child("name");
         int hour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                double rand_dub1 = ThreadLocalRandom.current().nextDouble();
                 String s;
-                if(hour>=0&&hour<12){
+                if(hour<12){
                     s="Good Morning, ";
-                }else if(hour>=12&&hour<16){
+                }else if(hour<16){
                     s="Good Afternoon, ";
-                }else if(hour>=16&&hour<24){
+                }else {
                     s="Good Evening, ";
-                }else{
-                    s="Hello, ";
                 }
-                setTitle(s+(snapshot.getValue().toString()));
+                setTitle(s+(Objects.requireNonNull(snapshot.getValue()).toString()));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

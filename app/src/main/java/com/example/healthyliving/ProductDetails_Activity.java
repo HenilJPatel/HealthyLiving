@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class PrescriptionDetails_Activity extends AppCompatActivity {
+public class ProductDetails_Activity extends AppCompatActivity {
     final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -26,11 +26,11 @@ public class PrescriptionDetails_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescription_details);
         Bundle extras = getIntent().getExtras();
-        String presID=null;
+        String prodID=null;
         if (extras != null) {
-            presID = extras.getString("presID");
+            prodID = extras.getString("prodID");
         }
-        Toast.makeText(this,presID,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,prodID,Toast.LENGTH_SHORT).show();
         RecyclerView recyclerView;
         recyclerView=findViewById(R.id.PrescriptionDetail);
         DatabaseReference databaseReference;
@@ -42,7 +42,7 @@ public class PrescriptionDetails_Activity extends AppCompatActivity {
         list=new ArrayList<>();
         PDAdapter = new Adapter_Prescription_Details(this,list);
         recyclerView.setAdapter(PDAdapter);
-        databaseReference= FirebaseDatabase.getInstance().getReference("Users/"+mAuth.getUid()+"/Prescriptions/"+presID);
+        databaseReference= FirebaseDatabase.getInstance().getReference("Users/"+mAuth.getUid()+"/Product/"+prodID);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override

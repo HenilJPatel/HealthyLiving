@@ -1,13 +1,13 @@
 package com.example.healthyliving;
 
-public class ProductData {
+public class Data_Product {
 
     // variables for storing our image and name.
     private String pID;
     private String pName;
     private String pUrl;
 
-    public ProductData() {}
+    public Data_Product() {}
 
     // getter and setter methods
     public String getpID() {

@@ -1,6 +1,7 @@
 package com.example.healthyliving;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,39 +22,37 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ProductListLoad extends RecyclerView.Adapter<ProductListLoad.MyViewHolder> {
+public class Adapter_Product_List extends RecyclerView.Adapter<Adapter_Product_List.MyViewHolder> {
     Context context;
-    ArrayList<ProductData> list;
+    ArrayList<Data_Product> list;
 
-    public ProductListLoad(Context context, ArrayList<ProductData> list) {
+    public Adapter_Product_List(Context context, ArrayList<Data_Product> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public ProductListLoad.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.product_items,parent,false);
-        return new ProductListLoad.MyViewHolder(v);
+    public Adapter_Product_List.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v= LayoutInflater.from(context).inflate(R.layout.cardview_product_list,parent,false);
+        return new Adapter_Product_List.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductListLoad.MyViewHolder holder, int position) {
-        ProductData prod= list.get(position);
+    public void onBindViewHolder(@NonNull Adapter_Product_List.MyViewHolder holder, int position) {
+        Data_Product prod= list.get(position);
         {
             DatabaseReference db= FirebaseDatabase.getInstance().getReference("Product/"+prod.getpID());
             db.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try {
-                        String msg = snapshot.child("pName").getValue(String.class);
-                        holder.Productname.setText(msg);
-
-                        String url=snapshot.child("pURL").getValue(String.class);
-                        Picasso.with(context).load(url).into(holder.img);
-                        holder.img.setImageResource(R.drawable.noimage);
+                    String msg = snapshot.child("pName").getValue(String.class);
+                    holder.product_name.setText(msg);
+                    String url=snapshot.child("pURL").getValue(String.class);
+                    Picasso.with(context).load(url).into(holder.img);
                     } catch (Exception e){
-                        Log.e("Firebase",e.toString());
+                        Toast.makeText(context,"Failed "+prod.getpID(),Toast.LENGTH_LONG).show();
                     }
                 }
                 @Override
@@ -72,26 +71,26 @@ public class ProductListLoad extends RecyclerView.Adapter<ProductListLoad.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Productname,brand,daysupply,noofrefill,drname,lastrefill,nextrefill;
+        TextView product_name,brand,day_supply,no_of_refill,dr_name, last_refill, next_refill;
         ImageView img;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.Prod_Image);
-            Productname=itemView.findViewById(R.id.Prod_ProductName);
-            /*brand=itemView.findViewById(R.id.brandname);
-            daysupply=itemView.findViewById(R.id.daySupply);
-            noofrefill=itemView.findViewById(R.id.Refill);
-            drname=itemView.findViewById(R.id.drName);
-            lastrefill=itemView.findViewById(R.id.refillDate);
-            nextrefill=itemView.findViewById(R.id.NextRefill);*/
+            product_name=itemView.findViewById(R.id.Prod_ProductName);
+            brand=itemView.findViewById(R.id.brandname);
+            day_supply=itemView.findViewById(R.id.daySupply);
+            no_of_refill=itemView.findViewById(R.id.Refill);
+            dr_name =itemView.findViewById(R.id.drName);
+            last_refill =itemView.findViewById(R.id.refillDate);
+            next_refill =itemView.findViewById(R.id.NextRefill);
 
             context=itemView.getContext();
             itemView.setOnClickListener(v -> {
                 int itemPosition  = getLayoutPosition();
                 Toast.makeText(context, "" + list.get(itemPosition).getpID(), Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
-                intent.putExtra("presID",list.get(itemPosition).getPresID().toString());
-                context.startActivity(intent);*/
+                Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
+                intent.putExtra("prodID",list.get(itemPosition).getpID());
+                context.startActivity(intent);
             });
         }
     }

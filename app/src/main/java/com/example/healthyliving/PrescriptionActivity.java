@@ -1,5 +1,6 @@
 package com.example.healthyliving;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -21,8 +22,8 @@ public class PrescriptionActivity extends AppCompatActivity {
     final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    PrescriptionLoadAdapter prescriptionLoadAdapter;
-    ArrayList<PrescriptionData> list;
+    Adapter_Prescription_List adapterPrescriptionList;
+    ArrayList<Data_Prescription> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,22 +34,23 @@ public class PrescriptionActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list=new ArrayList<>();
-        prescriptionLoadAdapter = new PrescriptionLoadAdapter(this,list);
-        recyclerView.setAdapter(prescriptionLoadAdapter);
+        adapterPrescriptionList = new Adapter_Prescription_List(this,list);
+        recyclerView.setAdapter(adapterPrescriptionList);
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Toast.makeText(PrescriptionActivity.this,String.valueOf(snapshot.getChildrenCount()),Toast.LENGTH_LONG).show();
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     try {
-                        PrescriptionData data = dataSnapshot.getValue(PrescriptionData.class);
+                        Data_Prescription data = dataSnapshot.getValue(Data_Prescription.class);
                         list.add(data);
                     } catch (Exception e){
                         System.out.println(e.toString());
                     }
                 }
                 if(list.size()>0){
-                    prescriptionLoadAdapter.notifyDataSetChanged();
+                    adapterPrescriptionList.notifyDataSetChanged();
                 }
             }
             @Override
