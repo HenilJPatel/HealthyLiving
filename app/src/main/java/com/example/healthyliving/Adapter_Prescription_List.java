@@ -92,11 +92,15 @@ public class Adapter_Prescription_List extends RecyclerView.Adapter<Adapter_Pres
             next_refill =itemView.findViewById(R.id.NextRefill);
 
             context=itemView.getContext();
-            itemView.setOnClickListener(v -> {
-                int itemPosition  = getLayoutPosition();
-                Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
-                intent.putExtra("presID",list.get(itemPosition).getPresID().toString());
-                context.startActivity(intent);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int itemPosition  = getLayoutPosition();
+                    //Toast.makeText(context, "" + list.get(itemPosition).getPresID(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
+                    intent.putExtra("presID",list.get(itemPosition).getPresID().toString());
+                    context.startActivity(intent);
+                }
             });
         }
     }
