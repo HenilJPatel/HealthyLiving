@@ -21,7 +21,7 @@
             android:layout_marginTop="5dp"
             android:layout_gravity="center_vertical">
             <ImageView
-                android:id="@+id/PDimageView"
+                android:id="@+id/PimageView"
                 android:layout_width="0dp"
                 android:layout_height="350dp"
                 android:layout_weight="1"
@@ -32,12 +32,47 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/PAvailability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_light"
+                android:text="Availability"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="normal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_light"
+                android:text=" > "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="normal"/>
+            <TextView
+                android:id="@+id/PCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_light"
+                android:text="@string/brand"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="normal"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingHorizontal="5dp"
             android:layout_marginTop="2dp"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/PDName"
+                android:id="@+id/PName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -57,7 +92,7 @@
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/PDbrand"
+                        android:id="@+id/Pbrand"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lexend_light"
@@ -66,133 +101,7 @@
                         android:textSize="25sp"
                         android:textStyle="normal"/>
                 </LinearLayout>
-                <View
-                    android:id="@+id/divider3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Supply:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        tools:ignore="HardcodedText" />
-                    <TextView
-                        android:id="@+id/PDsupply"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="30"
-                        android:layout_marginStart="15dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textAlignment="textEnd"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Refills Left:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginStart="2dp"
-                        android:layout_gravity="center_vertical"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
-                    <TextView
-                        android:id="@+id/PDrefill"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textAlignment="textEnd"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Prescribed By:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        tools:ignore="HardcodedText" />
-                    <TextView
-                        android:id="@+id/PDdoctor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/doctor_name"
-                        android:layout_marginStart="17dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textAlignment="textEnd"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Last Fill:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        tools:ignore="HardcodedText" />
-                    <TextView
-                        android:id="@+id/PDrefilldate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/random_date"
-                        android:layout_marginStart="7dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textAlignment="textEnd"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Next Fill:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        tools:ignore="HardcodedText" />
-                    <TextView
-                        android:id="@+id/PDnextrefill"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Not Available"
-                        android:layout_marginStart="3dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textAlignment="textEnd"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/DirectionLayout"
                     android:layout_width="match_parent"
@@ -213,7 +122,7 @@
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
                     <TextView
-                        android:id="@+id/PDdirection"
+                        android:id="@+id/Pdirection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Not Available"
@@ -243,7 +152,7 @@
                         android:layout_gravity="center_vertical"
                         tools:ignore="HardcodedText" />
                     <TextView
-                        android:id="@+id/PDwarning"
+                        android:id="@+id/Pwarning"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Not Available"

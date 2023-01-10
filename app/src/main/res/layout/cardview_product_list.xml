@@ -10,7 +10,7 @@
     android:layout_marginVertical="5dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
         android:orientation="vertical">
         <LinearLayout
@@ -38,8 +38,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/product_name"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Prod_BrandName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/brand"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="italic"
                 android:textAlignment="center"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>

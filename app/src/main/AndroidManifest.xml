@@ -47,6 +47,9 @@
             android:name=".PrescriptionDetails_Activity"
             android:exported="false" />
         <activity
+            android:name=".ProductDetails_Activity"
+            android:exported="false" />
+        <activity
             android:name=".PrescriptionActivity"
             android:exported="false" />
         <activity

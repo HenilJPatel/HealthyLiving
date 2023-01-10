@@ -46,9 +46,12 @@ public class Adapter_Product_List extends RecyclerView.Adapter<Adapter_Product_L
             db.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    try {
+                    try
+                    {
                     String msg = snapshot.child("pName").getValue(String.class);
                     holder.product_name.setText(msg);
+                        String brand = snapshot.child("pBrand").getValue(String.class);
+                        holder.brand.setText(brand);
                     String url=snapshot.child("pURL").getValue(String.class);
                     Picasso.with(context).load(url).into(holder.img);
                     } catch (Exception e){
@@ -71,26 +74,27 @@ public class Adapter_Product_List extends RecyclerView.Adapter<Adapter_Product_L
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView product_name,brand,day_supply,no_of_refill,dr_name, last_refill, next_refill;
+        TextView product_name,brand;
         ImageView img;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.Prod_Image);
             product_name=itemView.findViewById(R.id.Prod_ProductName);
-            brand=itemView.findViewById(R.id.brandname);
-            day_supply=itemView.findViewById(R.id.daySupply);
-            no_of_refill=itemView.findViewById(R.id.Refill);
-            dr_name =itemView.findViewById(R.id.drName);
-            last_refill =itemView.findViewById(R.id.refillDate);
-            next_refill =itemView.findViewById(R.id.NextRefill);
-
+            brand=itemView.findViewById(R.id.Prod_BrandName);
             context=itemView.getContext();
-            itemView.setOnClickListener(v -> {
-                int itemPosition  = getLayoutPosition();
-                Toast.makeText(context, "" + list.get(itemPosition).getpID(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context,PrescriptionDetails_Activity.class);
-                intent.putExtra("prodID",list.get(itemPosition).getpID());
-                context.startActivity(intent);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int itemPosition = getLayoutPosition();
+                    Toast.makeText(context, "" + list.get(itemPosition).getpID(), Toast.LENGTH_SHORT).show();
+                    try {
+                        Intent intent = new Intent(context, ProductDetails_Activity.class);
+                        intent.putExtra("prodID", list.get(itemPosition).getpID());
+                        context.startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(context, "Fuck, this isnt working boss", Toast.LENGTH_SHORT).show();
+                    }
+                }
             });
         }
     }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,10 +52,12 @@ public class Adapter_Prescription_List extends RecyclerView.Adapter<Adapter_Pres
                     String brand = snapshot.child("pBrand").getValue(String.class);
                     holder.brand.setText(brand);
                     String url=snapshot.child("pURL").getValue(String.class);
-                    Picasso.with(context).load(url).into(holder.img);
                     holder.img.setImageResource(R.drawable.noimage);
+                    Picasso.with(context).load(url).into(holder.img);
+
                 } catch (Exception e){
                     Log.e("Firebase",e.toString());
+                    Toast.makeText(context, "Bugs are bad.", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -69,6 +72,22 @@ public class Adapter_Prescription_List extends RecyclerView.Adapter<Adapter_Pres
         holder.no_of_refill.setText(pres.getRefill());
         holder.last_refill.setText(pres.getLastrefilldate());
         holder.next_refill.setText(pres.getNextrefilldate());
+        try {
+            DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("Doctor").child(pres.getDoctorID());
+            dbr.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String drname = snapshot.child("DoctorName").getValue(String.class);
+                    holder.dr_name.setText(drname);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }catch(Exception e){
+            Toast.makeText(context, "Failed to retrieve name for "+pres.getDoctorID(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

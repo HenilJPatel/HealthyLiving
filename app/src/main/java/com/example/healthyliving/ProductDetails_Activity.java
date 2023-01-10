@@ -24,7 +24,7 @@ public class ProductDetails_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prescription_details);
+        setContentView(R.layout.activity_product_details);
         Bundle extras = getIntent().getExtras();
         String prodID=null;
         if (extras != null) {
@@ -32,23 +32,23 @@ public class ProductDetails_Activity extends AppCompatActivity {
         }
         Toast.makeText(this,prodID,Toast.LENGTH_SHORT).show();
         RecyclerView recyclerView;
-        recyclerView=findViewById(R.id.PrescriptionDetail);
+        recyclerView=findViewById(R.id.ProductDetail);
         DatabaseReference databaseReference;
-        Adapter_Prescription_Details PDAdapter;
-        ArrayList<Data_Prescription> list;
+        Adapter_Product_Details PDAdapter;
+        ArrayList<Data_Product> list;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list=new ArrayList<>();
-        PDAdapter = new Adapter_Prescription_Details(this,list);
+        PDAdapter = new Adapter_Product_Details(this,list);
         recyclerView.setAdapter(PDAdapter);
-        databaseReference= FirebaseDatabase.getInstance().getReference("Users/"+mAuth.getUid()+"/Product/"+prodID);
+        databaseReference= FirebaseDatabase.getInstance().getReference("Product/"+prodID);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
-                    Data_Prescription data = snapshot.getValue(Data_Prescription.class);
+                    Data_Product data = snapshot.getValue(Data_Product.class);
                     list.add(data);
                 } catch (Exception e){
                     System.out.println(e.toString());

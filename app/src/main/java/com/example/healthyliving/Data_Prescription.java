@@ -14,7 +14,7 @@ public class Data_Prescription {
     private String lastrefilldate;
     private Long refill;
     private String productID;
-    private Long doctorID;
+    private String doctorID;
     private Long daysofsupply;
 
     public Data_Prescription() {
@@ -56,7 +56,7 @@ public class Data_Prescription {
         return doctorID.toString();
     }
 
-    public void setDoctorID(Long doctorID) {
+    public void setDoctorID(String doctorID) {
         this.doctorID = doctorID;
     }
 
