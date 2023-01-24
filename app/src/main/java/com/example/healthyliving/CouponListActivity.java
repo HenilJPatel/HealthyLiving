@@ -17,38 +17,38 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class PrescriptionActivity extends AppCompatActivity {
+public class CouponListActivity extends AppCompatActivity {
     final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    Adapter_Prescription_List adapterPrescriptionList;
-    ArrayList<Data_Prescription> list;
-
+    Adapter_Coupon_List adapter_coupon_list;
+    ArrayList<String> list;
+    long count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prescription_list);
-        recyclerView=findViewById(R.id.PrescriptionViewer);
-        databaseReference= FirebaseDatabase.getInstance().getReference("Users/"+mAuth.getUid()+"/Prescriptions/");
+        setContentView(R.layout.activity_coupon_list);
+        recyclerView=findViewById(R.id.CouponListViewer);
+        databaseReference= FirebaseDatabase.getInstance().getReference("Coupon");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list=new ArrayList<>();
-        adapterPrescriptionList = new Adapter_Prescription_List(this,list);
-        recyclerView.setAdapter(adapterPrescriptionList);
+        adapter_coupon_list = new Adapter_Coupon_List(this,list,"Product",CouponPharmaListActivity.class);
+        recyclerView.setAdapter(adapter_coupon_list);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     try {
-                        Data_Prescription data = dataSnapshot.getValue(Data_Prescription.class);
+                        String data = dataSnapshot.getKey();
                         list.add(data);
                     } catch (Exception e){
                         System.out.println(e.toString());
                     }
                 }
                 if(list.size()>0){
-                    adapterPrescriptionList.notifyDataSetChanged();
+                    adapter_coupon_list.notifyDataSetChanged();
                 }
             }
             @Override

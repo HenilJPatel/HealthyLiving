@@ -48,7 +48,6 @@ public class Homescreen extends AppCompatActivity {
         TextView s= findViewById(R.id.textView11);
         assert user != null;
         s.setText(user.getEmail());
-        //Toast.makeText(this,"Signed in as "+user.getEmail(),Toast.LENGTH_SHORT).show();
         Button btnProfile = findViewById(R.id.profile);
         btnProfile.setOnClickListener(v -> {
             Intent intent = new Intent(Homescreen.this, ViewProfile.class);
@@ -67,6 +66,11 @@ public class Homescreen extends AppCompatActivity {
         Button products = findViewById(R.id.products);
         products.setOnClickListener(v -> {
             Intent intent = new Intent(Homescreen.this, Product_Page.class);
+            startActivity(intent);
+        });
+        Button coupons = findViewById(R.id.home_coupons);
+        coupons.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this, CouponListActivity.class);
             startActivity(intent);
         });
         Button logout = findViewById(R.id.logout);

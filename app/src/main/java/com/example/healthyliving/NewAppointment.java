@@ -61,9 +61,11 @@ public class NewAppointment extends AppCompatActivity  {
             date_time.setInputType(InputType.TYPE_NULL);
             date_time.setOnClickListener(v -> DatePick(date_time));
         }
-        ArrayAdapter<String> aa = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,DoctorName);
+        ArrayAdapter aa = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,DoctorName);
+
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Doctor");
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

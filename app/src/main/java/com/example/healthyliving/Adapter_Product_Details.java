@@ -59,8 +59,8 @@ public class Adapter_Product_Details extends RecyclerView.Adapter<Adapter_Produc
                         String warning = snapshot.child("pWarning").getValue(String.class);
                         holder.warning.setText(warning);
                         String url=snapshot.child("pURL").getValue(String.class);
-                        Picasso.with(context).load(url).into(holder.img);
                         holder.img.setImageResource(R.drawable.noimage);
+                        Picasso.with(context).load(url).into(holder.img);
                     } catch (Exception e){
                         Log.e("Firebase",e.toString());
                     }
