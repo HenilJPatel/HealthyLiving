@@ -73,6 +73,11 @@ public class Homescreen extends AppCompatActivity {
             Intent intent = new Intent(Homescreen.this, CouponListActivity.class);
             startActivity(intent);
         });
+        Button code_trail = findViewById(R.id.code_trial);
+        code_trail.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this, Codetrial.class);
+            startActivity(intent);
+        });
         Button logout = findViewById(R.id.logout);
         logout.setOnClickListener(v -> {
             mAuth.signOut();

@@ -135,14 +135,35 @@
         android:layout_gravity="start"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/rounded"
         android:backgroundTint="#FFFFFF"
         android:drawableTop="@drawable/coupon_icon"
         android:paddingTop="15dp"
         android:text="Coupons"
         app:iconTint="#E4E4DE"
+        app:layout_constraintEnd_toStartOf="@+id/code_trial"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appointments" />
+
+    <Button
+        android:id="@+id/code_trial"
+        android:layout_width="160dp"
+        android:layout_height="140dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="#FFFFFF"
+        android:paddingTop="15dp"
+        android:text="Code Trail"
+        app:iconTint="#E4E4DE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home_coupons"
+        app:layout_constraintTop_toBottomOf="@+id/products"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/logout"
