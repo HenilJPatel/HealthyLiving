@@ -15,9 +15,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:editable="false"
         android:fontFamily="sans-serif-black"
-        android:text="Healthy Living"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#EF0A0A"
@@ -49,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="Deprecated,HardcodedText,MissingConstraints" />
 
     <Button
         android:id="@+id/profile"
@@ -68,7 +67,8 @@
 
         app:layout_constraintEnd_toStartOf="@+id/prescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/prescription"
@@ -86,7 +86,8 @@
         app:iconTint="#E4E4DE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/appointments"
@@ -106,7 +107,8 @@
         app:layout_constraintBottom_toTopOf="@+id/home_coupons"
         app:layout_constraintEnd_toStartOf="@+id/products"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile" />
+        app:layout_constraintTop_toBottomOf="@+id/profile"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/products"
@@ -126,7 +128,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/appointments"
         app:layout_constraintTop_toBottomOf="@+id/prescription"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/home_coupons"
@@ -140,30 +143,57 @@
         android:backgroundTint="#FFFFFF"
         android:drawableTop="@drawable/coupon_icon"
         android:paddingTop="15dp"
-        android:text="Coupons"
+        android:text="@string/coupons"
         app:iconTint="#E4E4DE"
-        app:layout_constraintEnd_toStartOf="@+id/code_trial"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appointments" />
 
-    <Button
-        android:id="@+id/code_trial"
-        android:layout_width="160dp"
-        android:layout_height="140dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/rounded"
-        android:backgroundTint="#FFFFFF"
-        android:paddingTop="15dp"
-        android:text="Code Trail"
-        app:iconTint="#E4E4DE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintStart_toEndOf="@+id/home_coupons"
         app:layout_constraintTop_toBottomOf="@+id/products"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/code_trial"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#FFFFFF"
+            android:text="Code Trial"
+            app:iconTint="#E4E4DE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/home_coupons"
+            app:layout_constraintTop_toBottomOf="@+id/products"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/code_trial_2"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="#FFFFFF"
+            android:text="Code Trial2"
+            app:iconTint="#E4E4DE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/home_coupons"
+            app:layout_constraintTop_toBottomOf="@+id/products"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/logout"
@@ -180,5 +210,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

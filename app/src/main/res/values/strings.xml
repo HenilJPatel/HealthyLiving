@@ -108,4 +108,5 @@
     <string name="doctor_name">Doctor Name</string>
     <string name="random_date">01/01/2022</string>
     <string name="title_activity_map_api_trial">map_api_trial</string>
+    <string name="coupons">Coupons</string>
 </resources>

@@ -1,71 +1,111 @@
 package com.example.healthyliving;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
+import android.os.HandlerThread;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.healthyliving.mapclass.Location;
+import com.example.healthyliving.mapclass.MapData;
+import com.example.healthyliving.mapclass.Result;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.net.URL;
+import java.util.List;
 
-public class Codetrial extends AppCompatActivity {
+public class Codetrial extends AppCompatActivity implements OnMapReadyCallback {
     final OkHttpClient client = new OkHttpClient();
     EditText input;
     TextView output;
     Button clicker;
     String str;
+    double getLat,getLng;
+    GoogleMap mMap;
+    Location l;
+
+    private LatLng location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_codetrial);
-        clicker=findViewById(R.id.codetrialbutton);
-        clicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    input=findViewById(R.id.codetrialinput);
-                    output =findViewById(R.id.codetrialOutput);
-                    Thread thread = new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try  {
-                                URL myUrl=new URL("https://maps.googleapis.com/maps/api/geocode/json?address="+input.getText()+"&key="+getString(R.string.google_maps_key));
-                                Request request=new Request.Builder()
-                                        .url(myUrl)
-                                        .build();
-                                Response response = client.newCall(request).execute();
-                                str= response.body().string();
+        clicker = findViewById(R.id.codetrialbutton);
+        clicker.setOnClickListener(v -> {
+            try {
+                input = findViewById(R.id.codetrialinput);
+                output = findViewById(R.id.codetrialOutput);
+                final int[] value = new int[1];
+                Thread t = new HandlerThread("UIHandler") {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        try {
+                            URL myUrl = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + input.getText() + "&key=" + getString(R.string.google_maps_key));
+                            Request request = new Request.Builder()
+                                    .url(myUrl)
+                                    .build();
+                            Response response = client.newCall(request).execute();
+                            str = response.body().string();
+                            Gson gson = new Gson();
+                            MapData mapData = gson.fromJson(str, MapData.class);
+                            List<Result> res = mapData.getResults();
+                            if (mapData.getStatus().equals("OK")) {
+                                l = res.get(0).getGeometry().getLocation();
+                                String str = "This is Gson filled up classes working\nLat=" + l.getLat() + "\nLng=" + l.getLng();
                                 output.setText(str);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            } else {
+
+                                output.setText("Request Returned:"+mapData.getStatus());
                             }
+                        } catch (Exception e) {
+                            e.getStackTrace();
                         }
-                    });
-                    thread.start();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
+                    }
+                };
+                try {
+                    t.start();
+                    t.join();
+                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.code_trial_map);
+                    assert mapFragment != null;
+                    mapFragment.getMapAsync(Codetrial.this);
+                } catch (Exception e) {
+                    clicker.setText(String.valueOf(value[0]));
                 }
+            } catch (Exception exception) {
+                clicker.setText(exception.toString());
             }
         });
     }
-    public String run(String address){
-
+    @NonNull
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
         try {
-            URL myUrl=new URL("https://maps.googleapis.com/maps/api/geocode/xml?address="+address+"&key="+R.string.google_maps_key);
-            Request request=new Request.Builder()
-                .url(myUrl)
-                .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }catch (Exception exception){
-            return exception.toString();
+            mMap = googleMap;
+            // Add a marker in Sydney and move the camera
+            location=new LatLng(l.getLat(),l.getLng());
+            mMap.addMarker(new MarkerOptions().position(location).title("The location"));
+            CameraPosition cameraPosition= new CameraPosition(location,15,0,0);
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        }catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }

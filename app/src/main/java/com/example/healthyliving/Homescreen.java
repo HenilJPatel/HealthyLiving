@@ -75,6 +75,11 @@ public class Homescreen extends AppCompatActivity {
         });
         Button code_trail = findViewById(R.id.code_trial);
         code_trail.setOnClickListener(v -> {
+            Intent intent = new Intent(Homescreen.this, map_api_trial.class);
+            startActivity(intent);
+        });
+        Button code_trail2 = findViewById(R.id.code_trial_2);
+        code_trail2.setOnClickListener(v -> {
             Intent intent = new Intent(Homescreen.this, Codetrial.class);
             startActivity(intent);
         });
