@@ -4,15 +4,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.HandlerThread;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthyliving.openfda.LabelData;
 import com.example.healthyliving.openfda.Label_Results;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
@@ -22,28 +20,28 @@ import com.squareup.okhttp.Response;
 import java.net.URL;
 import java.util.List;
 
-public class ProductDetails_Activity extends AppCompatActivity {
-    final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    final OkHttpClient client=new OkHttpClient();
-    String str;
-    List<Label_Results> list;
+public class openFDA_ProductList extends AppCompatActivity {
+    OkHttpClient client=new OkHttpClient();
+    RecyclerView recyclerView;
+    DatabaseReference databaseReference;
+    Adapter_openFDA_ProductList product_list;
+    List<Label_Results> label_results;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
-        Bundle extras = getIntent().getExtras();
-        str= extras.getString("Data",null);
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
-        RecyclerView recyclerView;
-        recyclerView=findViewById(R.id.ProductDetail);
-        DatabaseReference databaseReference;
-        Adapter_openFDA_ProductDetail PDAdapter;
+        setContentView(R.layout.activity_product_list);
+        recyclerView=findViewById(R.id.ProductViewer);
         recyclerView.setHasFixedSize(true);
-        if(str!=null) {
-            list=Threadset();
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            PDAdapter = new Adapter_openFDA_ProductDetail(this, list);
-            recyclerView.setAdapter(PDAdapter);
+        int columns=2;
+        recyclerView.setLayoutManager(new GridLayoutManager(this,columns));
+        label_results =Threadset();
+        TextView textView1=findViewById(R.id.textView4);
+        if (label_results.isEmpty()) {
+            return;
+        }else {
+            product_list = new Adapter_openFDA_ProductList(this, label_results);
+            recyclerView.setAdapter(product_list);
+            product_list.notifyDataSetChanged();
         }
     }
     public List<Label_Results> Threadset(){
@@ -54,15 +52,15 @@ public class ProductDetails_Activity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL myUrl = new URL("https://api.fda.gov/drug/label.json?limit=100&search=openfda.id.like.%22"+str+"%22");
+                    URL myUrl = new URL("https://api.fda.gov/drug/label.json?search=(_exists_:openfda)+AND+openfda.product_type:%22OTC%22&limit=100");
                     Request request = new Request.Builder()
                             .url(myUrl)
                             .build();
                     Response response = client.newCall(request).execute();
                     String str = response.body().string();
                     Gson gson = new Gson();
-                    LabelData mapData = gson.fromJson(str, LabelData.class);
-                    List<Label_Results> res = mapData.getResults();
+                    LabelData labelData = gson.fromJson(str, LabelData.class);
+                    List<Label_Results> res = labelData.getResults();
                     results1[0] =res;
                 } catch (Exception e) {
                     e.getStackTrace();

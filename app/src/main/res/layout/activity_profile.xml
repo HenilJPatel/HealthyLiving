@@ -124,7 +124,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileInsurance"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        tools:ignore="MissingConstraints" >
+        tools:ignore="MissingConstraints">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/profileDoc"
             android:layout_width="match_parent"

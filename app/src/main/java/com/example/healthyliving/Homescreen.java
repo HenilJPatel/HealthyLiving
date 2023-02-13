@@ -65,7 +65,7 @@ public class Homescreen extends AppCompatActivity {
         });
         Button products = findViewById(R.id.products);
         products.setOnClickListener(v -> {
-            Intent intent = new Intent(Homescreen.this, Product_Page.class);
+            Intent intent = new Intent(Homescreen.this,openFDA_ProductList.class);
             startActivity(intent);
         });
         Button coupons = findViewById(R.id.home_coupons);

@@ -87,6 +87,9 @@
             android:name=".Product_Page"
             android:exported="false" />
         <activity
+            android:name=".openFDA_ProductList"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity

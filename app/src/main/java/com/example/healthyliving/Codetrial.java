@@ -6,38 +6,28 @@ import android.os.HandlerThread;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.healthyliving.mapclass.Location;
-import com.example.healthyliving.mapclass.MapData;
-import com.example.healthyliving.mapclass.Result;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
+import com.example.healthyliving.openfda.LabelData;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.net.URL;
-import java.util.List;
 
-public class Codetrial extends AppCompatActivity implements OnMapReadyCallback {
+public class Codetrial extends AppCompatActivity //implements OnMapReadyCallback
+{
     final OkHttpClient client = new OkHttpClient();
     EditText input;
     TextView output;
     Button clicker;
     String str;
-    double getLat,getLng;
+    /*double getLat,getLng;
     GoogleMap mMap;
-    Location l;
+    Location l;*/
 
     private LatLng location;
 
@@ -56,35 +46,30 @@ public class Codetrial extends AppCompatActivity implements OnMapReadyCallback {
                     @Override
                     public void run() {
                         try {
-                            URL myUrl = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + input.getText() + "&key=" + getString(R.string.google_maps_key));
+                            //URL myUrl = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + input.getText() + "&key=" + getString(R.string.google_maps_key));
+                            URL myUrl = new URL("https://api.fda.gov/drug/label.json?limit=10");
                             Request request = new Request.Builder()
                                     .url(myUrl)
                                     .build();
                             Response response = client.newCall(request).execute();
                             str = response.body().string();
+                            output.setText(str);
                             Gson gson = new Gson();
-                            MapData mapData = gson.fromJson(str, MapData.class);
-                            List<Result> res = mapData.getResults();
-                            if (mapData.getStatus().equals("OK")) {
-                                l = res.get(0).getGeometry().getLocation();
-                                String str = "This is Gson filled up classes working\nLat=" + l.getLat() + "\nLng=" + l.getLng();
-                                output.setText(str);
-                            } else {
-
-                                output.setText("Request Returned:"+mapData.getStatus());
-                            }
+                            LabelData mapData = gson.fromJson(str, LabelData.class);
+                            //List<Label_Results> res = mapData.getResults();
+                            output.setText(str);
                         } catch (Exception e) {
-                            e.getStackTrace();
+                           output.setText(e.toString());
                         }
                     }
                 };
                 try {
                     t.start();
                     t.join();
-                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.code_trial_map);
-                    assert mapFragment != null;
-                    mapFragment.getMapAsync(Codetrial.this);
+                    //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    //        .findFragmentById(R.id.code_trial_map);
+                    //assert mapFragment != null;
+                    //mapFragment.getMapAsync(Codetrial.this);
                 } catch (Exception e) {
                     clicker.setText(String.valueOf(value[0]));
                 }
@@ -93,9 +78,9 @@ public class Codetrial extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
     }
-    @NonNull
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
+   // @NonNull
+   // @Override
+    /*public void onMapReady(GoogleMap googleMap) {
         try {
             mMap = googleMap;
             // Add a marker in Sydney and move the camera
@@ -107,5 +92,5 @@ public class Codetrial extends AppCompatActivity implements OnMapReadyCallback {
         }catch (Exception e){
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }
