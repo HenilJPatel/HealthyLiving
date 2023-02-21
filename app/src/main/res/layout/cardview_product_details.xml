@@ -101,7 +101,63 @@
                         android:textSize="25sp"
                         android:textStyle="normal"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/PurposeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:id="@id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Purpose"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/Ppurpose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Available"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/WarningLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:id="@id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Warning"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/Pwarning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Available"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/DirectionLayout"
                     android:layout_width="match_parent"
@@ -131,13 +187,14 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
+
                 <LinearLayout
-                    android:id="@+id/WarningLayout"
+                    android:id="@+id/StorageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <View
-                        android:id="@+id/divider"
+                        android:id="@+id/divider4"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?android:attr/listDivider" />
@@ -145,14 +202,43 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Warning"
+                        android:text="Storage and Handling"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_gravity="center_vertical"
                         tools:ignore="HardcodedText" />
                     <TextView
-                        android:id="@+id/Pwarning"
+                        android:id="@+id/PStorage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Available"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/DonotuseLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Do not Use"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/PDonotuse"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Not Available"

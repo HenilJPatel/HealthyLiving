@@ -25,7 +25,7 @@ import java.util.List;
 public class ProductDetails_Activity extends AppCompatActivity {
     final private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     final OkHttpClient client=new OkHttpClient();
-    String str;
+    String str,img;
     List<Label_Results> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,8 @@ public class ProductDetails_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         Bundle extras = getIntent().getExtras();
         str= extras.getString("Data",null);
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+        img= extras.getString("img",null);
+        Toast.makeText(this,img,Toast.LENGTH_SHORT).show();
         RecyclerView recyclerView;
         recyclerView=findViewById(R.id.ProductDetail);
         DatabaseReference databaseReference;
@@ -42,7 +43,7 @@ public class ProductDetails_Activity extends AppCompatActivity {
         if(str!=null) {
             list=Threadset();
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            PDAdapter = new Adapter_openFDA_ProductDetail(this, list);
+            PDAdapter = new Adapter_openFDA_ProductDetail(this, list,img);
             recyclerView.setAdapter(PDAdapter);
         }
     }

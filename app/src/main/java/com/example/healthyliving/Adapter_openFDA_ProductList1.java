@@ -15,8 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthyliving.imageclass.imagesearch;
-import com.example.healthyliving.openfda.Label_Results;
-import com.example.healthyliving.openfda.Label_openfda;
+import com.example.healthyliving.openfda.NDC_Results;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -25,40 +24,41 @@ import com.squareup.okhttp.Response;
 import java.net.URL;
 import java.util.List;
 
-public class Adapter_openFDA_ProductList extends RecyclerView.Adapter<Adapter_openFDA_ProductList.MyViewHolder> {
-    Label_Results lResults;
+public class Adapter_openFDA_ProductList1 extends RecyclerView.Adapter<Adapter_openFDA_ProductList1.MyViewHolder> {
+    NDC_Results lResults;
     Context context;
-    List<Label_Results> list;
+    List<NDC_Results> list;
     final String[] strr = {""};
 
-    public Adapter_openFDA_ProductList(Context context, List<Label_Results> list) {
+    public Adapter_openFDA_ProductList1(Context context, List<NDC_Results> list) {
             this.context = context;
             this.list = list;
         }
 
         @NonNull
         @Override
-        public Adapter_openFDA_ProductList.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public Adapter_openFDA_ProductList1.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View v= LayoutInflater.from(context).inflate(R.layout.cardview_product_list,parent,false);
-            return new Adapter_openFDA_ProductList.MyViewHolder(v);
+            return new Adapter_openFDA_ProductList1.MyViewHolder(v);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull Adapter_openFDA_ProductList.MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull Adapter_openFDA_ProductList1.MyViewHolder holder, int position) {
             lResults =list.get(position);
 
-            Label_openfda Results=lResults.getOpenfda();
-            //String productname= Results.getBrand_name_base()+(Results.getBrand_name_suffix()!=null?" "+ NDCResults.getBrand_name_suffix():"");
-            String productname=Results.getBrand_name().get(0);
+            NDC_Results Results=lResults;
+            String productname= Results.getBrand_name_base()+(Results.getBrand_name_suffix()!=null?" "+ Results.getBrand_name_suffix():"");
+            //String productname=Results.getBrand_name().get(0);
             holder.product_name.setText(productname);
-            String manufacturer=Results.getManufacturer_name().get(0);
-            holder.brand.setText(manufacturer);
+            //String manufacturer=Results.getManufacturer_name().get(0);
+            String labeler=Results.getLabeler_name();
+            holder.brand.setText(labeler);
             holder.img.setImageResource(R.drawable.noimage);
             {Thread t=new Thread(() -> {
                 try {
                     Context threadcontext=context;
                     OkHttpClient client=new OkHttpClient();
-                    URL myUrl = new URL("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyAwL-gYCuyPPP9fghAPPUlhVJdOfI4E7qM&cx=b50c011fe291c4c87&q="+productname+" "+manufacturer);//12df352a260bc480e
+                    URL myUrl = new URL("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyAwL-gYCuyPPP9fghAPPUlhVJdOfI4E7qM&cx=b50c011fe291c4c87&q="+productname+" "+labeler);//12df352a260bc480e
                     Request request = new Request.Builder()
                             .url(myUrl)
                             .build();
@@ -109,7 +109,7 @@ public class Adapter_openFDA_ProductList extends RecyclerView.Adapter<Adapter_op
                         //Toast.makeText(context, "" + list.get(itemPosition).getOpenfda().getSpl_id(), Toast.LENGTH_SHORT).show();
                         try {
                             Intent intent = new Intent(context, ProductDetails_Activity.class);
-                            intent.putExtra("Data",list.get(itemPosition).getOpenfda().getSpl_id().get(0));
+                            intent.putExtra("Data",list.get(itemPosition).getSpl_id());
                             //Toast.makeText(context, strr[0], Toast.LENGTH_SHORT).show();
                             intent.putExtra("img",strr[0]);
                             context.startActivity(intent);

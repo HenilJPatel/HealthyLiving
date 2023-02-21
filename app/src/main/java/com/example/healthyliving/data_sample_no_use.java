@@ -46,7 +46,7 @@ public class data_sample_no_use {
         "ca7bbcc8-2354-375c-e053-2995a90a72a0"
         ],
         "spl_set_id": [
-        "0000025c-6dbf-4af7-a741-5cbacaed519a"
+                "0000025c-6dbf-4af7-a741-5cbacaed519a"
         ],
         "package_ndc": [
         "15631-0404-0",
@@ -212,4 +212,287 @@ public class data_sample_no_use {
         "ACTIVE INGREDIENTS MEZEREUM"
       ]
     }*/
+/*    {
+        "kind": "customsearch#search",
+            "url": {
+        "type": "application/json",
+                "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    },
+        "queries": {
+        "request": [
+        {
+            "title": "Google Custom Search - Nicotine rite aid",
+                "totalResults": "3",
+                "searchTerms": "Nicotine rite aid",
+                "count": 3,
+                "startIndex": 1,
+                "inputEncoding": "utf8",
+                "outputEncoding": "utf8",
+                "safe": "off",
+                "cx": "12df352a260bc480e"
+        }
+    ]
+    },
+        "context": {
+        "title": "McKessonImages"
+    },
+        "searchInformation": {
+        "searchTime": 0.308807,
+                "formattedSearchTime": "0.31",
+                "totalResults": "3",
+                "formattedTotalResults": "3"
+    },
+        "items": [
+        {
+            "kind": "customsearch#result",
+                "title": "Stop Smoking Aid 2 mg Strength Lozenge",
+                "htmlTitle": "Stop Smoking \u003cb\u003eAid\u003c/b\u003e 2 mg Strength Lozenge",
+                "link": "https://mms.mckesson.com/product/922055/Perrigo-Company-45802034405",
+                "displayLink": "mms.mckesson.com",
+                "snippet": "Features. Reduces withdrawal symptoms, including nicotine craving, associated with quitting smoking; For those who smoke their first cigarette more than 30 ...",
+                "htmlSnippet": "Features. Reduces withdrawal symptoms, including \u003cb\u003enicotine\u003c/b\u003e craving, associated with quitting smoking; For those who smoke their first cigarette more than 30&nbsp;...",
+                "cacheId": "s4WQ9M92HyYJ",
+                "formattedUrl": "https://mms.mckesson.com/product/.../Perrigo-Company-45802034405",
+                "htmlFormattedUrl": "https://mms.mckesson.com/product/.../Perrigo-Company-45802034405",
+                "pagemap": {
+            "cse_thumbnail": [
+            {
+                "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTVlm4b-OEIoHAhh7FzJKJxthaSytkWSZkP-Hqx2WoLt6C1gKiQ3LjxlmMf",
+                    "width": "225",
+                    "height": "225"
+            }
+        ],
+            "metatags": [
+            {
+                "viewport": "width=device-width, initial-scale=1",
+                    "_csrf_header": "X-CSRF-TOKEN",
+                    "_csrf": "a9056059-798d-4488-84ca-e0c72ff1d9f1",
+                    "title": "Perrigo Company 45802034405 - McKesson Medical-Surgical"
+            }
+        ],
+            "cse_image": [
+            {
+                "src": "https://imgcdn.mckesson.com/CumulusWeb/Images/High_Res/922055.jpg"
+            }
+        ]
+        }
+        },
+        {
+            "kind": "customsearch#result",
+                "title": "Perrigo Company 45802087305 - McKesson Medical-Surgical",
+                "htmlTitle": "Perrigo Company 45802087305 - McKesson Medical-Surgical",
+                "link": "https://mms.mckesson.com/product/922056/Perrigo-Company-45802087305",
+                "displayLink": "mms.mckesson.com",
+                "snippet": "Stop Smoking Aid 4 mg Strength Lozenge Perrigo Company 45802087305. ... Reduces withdrawal symptoms, including nicotine craving, associated with quitting ...",
+                "htmlSnippet": "Stop Smoking \u003cb\u003eAid\u003c/b\u003e 4 mg Strength Lozenge Perrigo Company 45802087305. ... Reduces withdrawal symptoms, including \u003cb\u003enicotine\u003c/b\u003e craving, associated with quitting&nbsp;...",
+                "cacheId": "LmhWIWWFD8cJ",
+                "formattedUrl": "https://mms.mckesson.com/product/.../Perrigo-Company-45802087305",
+                "htmlFormattedUrl": "https://mms.mckesson.com/product/.../Perrigo-Company-45802087305",
+                "pagemap": {
+            "cse_thumbnail": [
+            {
+                "src": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR74zLzDfxvbfw5t2sP80hBfriOkFNfIUivsaPJctiuSHmACYn1ly2vVMk",
+                    "width": "225",
+                    "height": "225"
+            }
+        ],
+            "metatags": [
+            {
+                "viewport": "width=device-width, initial-scale=1",
+                    "_csrf_header": "X-CSRF-TOKEN",
+                    "_csrf": "692d32b2-4e35-47a1-994e-eb94b84e336c",
+                    "title": "Perrigo Company 45802087305 - McKesson Medical-Surgical"
+            }
+        ],
+            "cse_image": [
+            {
+                "src": "https://imgcdn.mckesson.com/CumulusWeb/Images/High_Res/922056.jpg"
+            }
+        ]
+        }
+        },
+        {
+            "kind": "customsearch#result",
+                "title": "Shop Perrigo Company by Most Popular - McKesson Medical-Surgical",
+                "htmlTitle": "Shop Perrigo Company by Most Popular - McKesson Medical-Surgical",
+                "link": "https://mms.mckesson.com/catalog?node=5564863&src=PF&pageSize=100&sort=Po&_back=MTIqY0hxUHZYR1BDMFUqZDRPd1R1V25QUHNLcWZvMnN5WlhHYkdYOG1FR1lWTHJ1alNwWWhncVk1US1rN1gwQXhVd3U3T1BseVd3ZjBxVzFNMG9kSE9hVy1BZTR3ZXF1Q3RhT3YxWlRMNDFTSGh5MzM5LWF5WUFEWnhheWFJMThrdHo2USoq",
+                "displayLink": "mms.mckesson.com",
+                "snippet": "First Aid Antibiotic Generic BACiiM® Ointment 0.9 Gram Individual Packet. Log in for pricing and availability. Log In to Order View Alternatives.",
+                "htmlSnippet": "First \u003cb\u003eAid\u003c/b\u003e Antibiotic Generic BACiiM® Ointment 0.9 Gram Individual Packet. Log in for pricing and availability. Log In to Order View Alternatives.",
+                "cacheId": "OOJt8_4s920J",
+                "formattedUrl": "https://mms.mckesson.com/catalog?node=5564863&src=PF...",
+                "htmlFormattedUrl": "https://mms.mckesson.com/catalog?node=5564863&amp;src=PF...",
+                "pagemap": {
+            "cse_thumbnail": [
+            {
+                "src": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRPCZzgPQPqZ_oxHjXvE7gp16_pqX1LWZjeeBOHmJ1WbiMdhG_teJrZYSc",
+                    "width": "225",
+                    "height": "225"
+            }
+        ],
+            "metatags": [
+            {
+                "viewport": "width=device-width, initial-scale=1",
+                    "_csrf_header": "X-CSRF-TOKEN",
+                    "_csrf": "49aa949e-78f4-49f5-9a6d-d321cfdd6075"
+            }
+        ],
+            "cse_image": [
+            {
+                "src": "https://imgcdn.mckesson.com/CumulusWeb/Images/Item_Detail/498019_pkgfront.jpg"
+            }
+        ]
+        }
+        }
+  ]
+    }*/
 }
+/*<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ViewProfile">
+<TextView
+        android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="User Profile"
+                android:text="User Profile"
+                android:textAlignment="center"
+                android:textColor="#F10707"
+                android:textSize="36dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+<EditText
+        android:id="@+id/profName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="Patient Name"
+                android:inputType="textPersonName"
+                android:text="Name: Andrew Smith"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:ignore="MissingConstraints" />
+
+<EditText
+        android:id="@+id/profDOB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="Date of Birth"
+                android:inputType="date"
+                android:text="Date of Birth: 06/12/1989"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profName"
+                tools:ignore="MissingConstraints" />
+
+<EditText
+        android:id="@+id/profHI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="Health Insurance Number"
+                android:inputType="textPersonName"
+                android:text=" Health Insurance number: HI 456987321002"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profDOB"
+                tools:ignore="MissingConstraints" />
+
+<EditText
+        android:id="@+id/profDoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="Primary Doctor"
+                android:inputType="textPersonName"
+                android:text="Primary Doctor: Dr. Valeria Cruze"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profHI"
+                tools:ignore="MissingConstraints" />
+
+<EditText
+        android:id="@+id/profSSN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="SSN"
+                android:inputType="number"
+                android:text="SSN: ***-**-**90"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profDoc"
+                tools:ignore="MissingConstraints" />
+
+<EditText
+        android:id="@+id/profAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="false"
+                android:ems="10"
+                android:hint="Address"
+                android:inputType="textPostalAddress"
+                android:text="Address: 456 Young St, lancaster, NY 32112"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profSSN"
+                tools:ignore="MissingConstraints" />
+
+<Button
+        android:id="@+id/ViewProfile"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Edit Profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profAddress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>*/
