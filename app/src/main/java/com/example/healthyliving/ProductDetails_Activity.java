@@ -33,8 +33,8 @@ public class ProductDetails_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         Bundle extras = getIntent().getExtras();
         str= extras.getString("Data",null);
-        img= extras.getString("img",null);
-        Toast.makeText(this,img,Toast.LENGTH_SHORT).show();
+        img= extras.getString("img");
+        Toast.makeText(this,String.valueOf(img), Toast.LENGTH_SHORT).show();
         RecyclerView recyclerView;
         recyclerView=findViewById(R.id.ProductDetail);
         DatabaseReference databaseReference;

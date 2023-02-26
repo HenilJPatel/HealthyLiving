@@ -29,10 +29,14 @@ public class Adapter_openFDA_ProductList1 extends RecyclerView.Adapter<Adapter_o
     Context context;
     List<NDC_Results> list;
     final String[] strr = {""};
+    String[] urlstr=new String[100];
+
+    private Adapter_openFDA_ProductList1 adapter;
 
     public Adapter_openFDA_ProductList1(Context context, List<NDC_Results> list) {
             this.context = context;
             this.list = list;
+            this.adapter=this;
         }
 
         @NonNull
@@ -47,8 +51,9 @@ public class Adapter_openFDA_ProductList1 extends RecyclerView.Adapter<Adapter_o
             lResults =list.get(position);
 
             NDC_Results Results=lResults;
-            String productname= Results.getBrand_name_base()+(Results.getBrand_name_suffix()!=null?" "+ Results.getBrand_name_suffix():"");
-            //String productname=Results.getBrand_name().get(0);
+            String productinit= Results.getBrand_name_base()+(Results.getBrand_name_suffix()!=null?" "+ Results.getBrand_name_suffix():"");
+            String product=productinit.replace("-"," ");//String productname=Results.getBrand_name().get(0);
+            String productname= product.toUpperCase();
             holder.product_name.setText(productname);
             //String manufacturer=Results.getManufacturer_name().get(0);
             String labeler=Results.getLabeler_name();
@@ -57,8 +62,11 @@ public class Adapter_openFDA_ProductList1 extends RecyclerView.Adapter<Adapter_o
             {Thread t=new Thread(() -> {
                 try {
                     Context threadcontext=context;
+                    int p=position;
                     OkHttpClient client=new OkHttpClient();
-                    URL myUrl = new URL("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyAwL-gYCuyPPP9fghAPPUlhVJdOfI4E7qM&cx=b50c011fe291c4c87&q="+productname+" "+labeler);//12df352a260bc480e
+                    String[] companyl=labeler.split(",");
+                    String[] company=companyl[0].split(" ");
+                    URL myUrl = new URL("https://customsearch.googleapis.com/customsearch/v1?key=AIzaSyAwL-gYCuyPPP9fghAPPUlhVJdOfI4E7qM&cx=b50c011fe291c4c87&q="+productname+" "+companyl[0]);//12df352a260bc480e
                     Request request = new Request.Builder()
                             .url(myUrl)
                             .build();
@@ -67,24 +75,44 @@ public class Adapter_openFDA_ProductList1 extends RecyclerView.Adapter<Adapter_o
                     Gson gson = new Gson();
                     imagesearch img=gson.fromJson(str,imagesearch.class);
 
-                    int i=0;
-                    while(img.getItems().get(0).getPagemap().getCse_image().iterator().hasNext()){
-                        strr[0] =img.getItems().get(0).getPagemap().getCse_image().get(i).getSrc();
-                        if(strr[0].contains("https")){
+                    Boolean test=false;
+                    int i=0,j=0;
+                    while(img.getItems().iterator().hasNext()){
+                        i=0;
+                        while(img.getItems().get(j).getPagemap().getCse_image().iterator().hasNext()) {
+                            strr[0] = img.getItems().get(j).getPagemap().getCse_image().get(i).getSrc();
+                            if ((strr[0].contains("http")||strr[0].contains("HTTP"))&&!(strr[0].contains(".svg")||strr[0].contains("icon")||strr[0].contains("logo")||strr[0].contains("Portrait.jpg"))) {
+                                urlstr[p]=strr[0];
+                                try {
+                                    if(urlstr[p]!=null) {
+                                        URL url = new URL(urlstr[p]);
+                                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                        holder.img.setImageBitmap(bitmap);
+                                        //holder.brand.setText(holder.brand.getText() + "\n" + urlstr);
+                                        test=true;
+                                    }
+                                }catch (Exception e){
+                                    test=false;
+                                    continue;
+                                }
+                                break;
+                            }
+                            else{
+                                urlstr[p]=null;
+                            }
+                            i++;
+                        }
+                        if(test){
                             break;
                         }
-                        i++;
+                        j++;
                     }
-                    //holder.product_name.setText(strr[0]);
-                    URL url = new URL(strr[0]);
-                    Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    holder.img.setImageBitmap(bitmap);
                 } catch (Exception e) {
-                    System.out.println(e.toString());
+                    System.out.println(e.toString()+e.getMessage());
+                 //   urlstr[position]=null;
                 }
             });
             t.start();
-
             }
             //holder.product_name.setText(list.get(position).getGeneric_name());
         }
@@ -111,7 +139,7 @@ public class Adapter_openFDA_ProductList1 extends RecyclerView.Adapter<Adapter_o
                             Intent intent = new Intent(context, ProductDetails_Activity.class);
                             intent.putExtra("Data",list.get(itemPosition).getSpl_id());
                             //Toast.makeText(context, strr[0], Toast.LENGTH_SHORT).show();
-                            intent.putExtra("img",strr[0]);
+                            if(urlstr[itemPosition]!=null)intent.putExtra("img",urlstr[itemPosition]);
                             context.startActivity(intent);
                         } catch (Exception e) {
                             Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();

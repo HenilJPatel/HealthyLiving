@@ -39,11 +39,11 @@ public class Appointments extends AppCompatActivity {
             startActivity(intent);
         });
         listView=findViewById(R.id.AppointmentList);
-        arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,arrayList);
+        arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             sid=((String)parent.getItemAtPosition(position)).split(" ");
-            Toast.makeText(Appointments.this,sid[1], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Appointments.this,sid[1], Toast.LENGTH_SHORT).show();
             btncancel.setEnabled(true);
             btncancel.setText(getString(R.string.cancel_appointment) + sid[1]);
         });

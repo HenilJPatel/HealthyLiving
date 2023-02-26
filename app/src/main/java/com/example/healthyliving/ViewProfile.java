@@ -64,12 +64,12 @@ public class ViewProfile extends AppCompatActivity {
         profDoc=findViewById(R.id.profDoc);
         profSSN=findViewById(R.id.profSSN);
         profAddress=findViewById(R.id.profAddress);
-        Exist_NotNull(profName,"Name : ",uP.getName());
-        Exist_NotNull(profDOB,"Date of Birth : ",uP.getDateOfBirth());
-        Exist_NotNull(profInsurance,"Insurance : ",uP.getHealthInsuranceNo());
-        Exist_NotNull(profDoc,"Primary Doctor : ",uP.getPrimaryDoctor());
-        Exist_NotNullSSN(profSSN,"SSN : ",uP.getSSN());
-        Exist_NotNull(profAddress,"Address : ",uP.getAddress());
+        Exist_NotNull(profName,"",uP.getName());
+        Exist_NotNull(profDOB,"",uP.getDateOfBirth());
+        Exist_NotNull(profInsurance,"",uP.getHealthInsuranceNo());
+        Exist_NotNull(profDoc,"",uP.getPrimaryDoctor());
+        Exist_NotNullSSN(profSSN,"",uP.getSSN());
+        Exist_NotNull(profAddress,"",uP.getAddress());
     }
     public void Exist_NotNull(EditText et,String title,String p) {
         {

@@ -66,16 +66,24 @@ public class Adapter_openFDA_ProductList extends RecyclerView.Adapter<Adapter_op
                     String str = response.body().string();
                     Gson gson = new Gson();
                     imagesearch img=gson.fromJson(str,imagesearch.class);
-
-                    int i=0;
-                    while(img.getItems().get(0).getPagemap().getCse_image().iterator().hasNext()){
-                        strr[0] =img.getItems().get(0).getPagemap().getCse_image().get(i).getSrc();
-                        if(strr[0].contains("https")){
+                    Boolean test=false;
+                    int i=0,j=0;
+                    while(img.getItems().iterator().hasNext()){
+                        i=0;
+                        while(img.getItems().get(j).getPagemap().getCse_image().iterator().hasNext()) {
+                            strr[0] = img.getItems().get(0).getPagemap().getCse_image().get(i).getSrc();
+                            if (strr[0].contains("https")) {
+                                test=true;
+                                break;
+                            }
+                            i++;
+                        }
+                        if(test){
                             break;
                         }
-                        i++;
+                        j++;
                     }
-                    //holder.product_name.setText(strr[0]);
+                    holder.product_name.setText(strr[0]+" "+holder.product_name.getText());
                     URL url = new URL(strr[0]);
                     Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                     holder.img.setImageBitmap(bitmap);
